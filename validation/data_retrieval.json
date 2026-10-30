@@ -1,0 +1,7 @@
+{
+  "fresh_directory": true,
+  "data_preexisting": false,
+  "exit_code": 0,
+  "checksum_verified": true,
+  "retrieval_stdout": "Data source unavailable: HTTP Error 403: Forbidden\nRetrieved data from: https://raw.githubusercontent.com/shahadasseri/No-show-appointments-Data-Analysis/9a015604477dbaaadd4187b9b80522abdb722bb3/KaggleV2-May-2016.csv\nVerified dataset: noshowappointments-kagglev2-may-2016.csv (10,739,535 bytes)\n"
+}

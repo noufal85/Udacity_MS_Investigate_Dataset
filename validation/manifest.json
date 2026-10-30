@@ -1,0 +1,30 @@
+{
+  "files": {
+    "Investigate_a_Dataset.ipynb": "8bd6eb5d6aeceec0cea9b43d770e2ec79519dd79b15ce7e60dc11a964896a8ff",
+    "Investigate_a_Dataset.html": "f1ae5e3c16040f27215c882987c9583bbe9702512b3c85c8eef472c7b5ebae38",
+    "README.md": "23b3a7d78af7cc8bb627feefbc6f7d11894b3514c7ae80c502443576a03ebde0",
+    "PROJECT_REQUIREMENTS.md": "ab286870250116445daa634ee80e45c7807e8c15fd29e340b40a8d5a8b1d1fc1",
+    "requirements.txt": "fd34851c6a68daf07748f97217306fe575a40243f9faf1a536badf872befd146",
+    "analysis.py": "9cc16a581fb8d6e1fbc9c0810d3d3b1ca0c9f963d241973b25032d10f35f5435",
+    "build_notebook.py": "5e90969a31fa179da1510e9ff2e962adc6f077ac45e6b4b85424dfc5a12dda98",
+    "execute_report.py": "35ea202a261243ab7d9ddc7c0f6e76b98fdfca3745ac997595aee5302d0785d9",
+    "prepare_data.py": "cc39e8ed2e5e0d3adff93f9bb1931dc0656a68dc79805f985950606fa8160a90",
+    "tests/test_analysis.py": "d9926afefe38be454b549dfa55d6f32ef3caa18459fa4084dbc96bd902010191",
+    ".gitignore": "18237fc83a7d1735e0d9371d05f2e585ce41219a949788d8fbc5b446eea044d5",
+    "figures/01_outcome_and_age.png": "7f129084252b9b9767bc96645a2ff410b69e6e015bad88f29f67d128a8e17fe7",
+    "figures/02_age_rates.png": "77a97696ed05d87bbca17973446886c456d8165afb15ab9e1cad9034a7643f1d",
+    "figures/03_lead_time.png": "ce1ebd8e94462ba5e93e2e391b0792f8e6ab569cc7d16bd81720b4a37bcc2354",
+    "figures/04_sms_crude.png": "0b8b33f1db93ec783e7a263268659b1cdaa34403c2229e7f76b1093c6111612e",
+    "figures/05_sms_by_lead_time.png": "e25a3a3336aaee805c18a7aefb264727283fe5e8b35fe8928fe94988226ef8e0",
+    "figures/06_age_by_lead_time.png": "6364f366fe2f05c0eccd71f256dba0ef3835636e9f5b6240e9b1da3ad047cdd6",
+    "validation/data_retrieval.json": "06c9fb7bb48e8313b583dc54b4ab870144c09c567517e2c33d96d62811f33292",
+    "validation/execution.json": "0f2892340c4dda54f676bb86e01946e619ed01fdb38175b509e6bc6624e8e717",
+    "validation/rubric_checks.json": "d30f23944465879aeab779d73f0ab557cc3e25a5b4709341230be4d7bd3667b1",
+    "validation/tests.txt": "a06ea3d49b79eb14114c95cc452dc4d0a4744f32cae745a53d79ac03aa8190f8",
+    "SUBMISSION_FILES.txt": "e772cf8e10f2a3e646d95365e7391e65779ab6784ad17e69490c1483f977fdd7"
+  },
+  "raw_data_excluded": true,
+  "dataset_sha256": "9132d3e7d0246617df9041d3764f20ad6f08e7b0d9f0997fa254fc5e52eda27d",
+  "publication": "https://github.com/noufal85/Udacity_MS_Investigate_Dataset",
+  "independent_reviews": 2
+}

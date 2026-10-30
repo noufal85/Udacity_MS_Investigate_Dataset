@@ -1,0 +1,23 @@
+{
+  "raw_appointments": 110527,
+  "clean_appointments": 110521,
+  "excluded": 6,
+  "no_shows": 22314,
+  "no_show_pct": 20.189828,
+  "unique_patients": 62298,
+  "independent_predictors": [
+    "age",
+    "waiting_days",
+    "sms_received"
+  ],
+  "code_cells_executed": 8,
+  "nonempty_code_outputs": 8,
+  "embedded_html_figures": 6,
+  "shared_sms_lead_time_bands": 5,
+  "sms_direction_reversal_verified": true,
+  "reused_helpers": [
+    "group_rates",
+    "label_plot"
+  ],
+  "status": "PASS"
+}

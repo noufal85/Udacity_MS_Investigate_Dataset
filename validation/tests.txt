@@ -1,0 +1,16 @@
+test_calendar_days_and_outcome_are_encoded_correctly (test_analysis.CleaningTests.test_calendar_days_and_outcome_are_encoded_correctly) ... ok
+test_conflicting_duplicate_appointment_ids_are_rejected (test_analysis.CleaningTests.test_conflicting_duplicate_appointment_ids_are_rejected) ... ok
+test_exclusion_accounting_preserves_repeated_patients (test_analysis.CleaningTests.test_exclusion_accounting_preserves_repeated_patients) ... ok
+test_unknown_outcome_is_rejected (test_analysis.CleaningTests.test_unknown_outcome_is_rejected) ... ok
+test_download_uses_verified_mirror_when_course_url_is_forbidden (test_analysis.DataRetrievalTests.test_download_uses_verified_mirror_when_course_url_is_forbidden) ... ok
+test_every_valid_record_gets_an_age_and_waiting_band (test_analysis.SummaryTests.test_every_valid_record_gets_an_age_and_waiting_band) ... ok
+test_plot_helper_returns_labeled_axes (test_analysis.SummaryTests.test_plot_helper_returns_labeled_axes) ... ok
+test_rate_table_keeps_denominators_and_observed_groups (test_analysis.SummaryTests.test_rate_table_keeps_denominators_and_observed_groups) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.165s
+
+OK
+Data source unavailable: HTTP Error 403: Forbidden
+Retrieved data from: https://raw.githubusercontent.com/shahadasseri/No-show-appointments-Data-Analysis/9a015604477dbaaadd4187b9b80522abdb722bb3/KaggleV2-May-2016.csv
+Verified dataset: appointments.csv (21 bytes)
