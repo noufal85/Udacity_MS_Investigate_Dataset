@@ -26,7 +26,16 @@
     "analysis_code_unchanged": true,
     "independent_followup_reviews": 2,
     "local_skill_validation": "PASS",
-    "browser_layout_review": "Unavailable: local file URL rejected"
+    "browser_layout_review": "Unavailable: local file URL rejected",
+    "no_ai_slop_followup": {
+      "reviewed_baseline": "cd1f38b",
+      "findings_resolved": 3,
+      "evaluation_guide_review": "PASS",
+      "changed_markdown_cells": [24, 25],
+      "code_sources_and_chart_images_unchanged": true,
+      "independent_followup_review": "Approved; no blockers",
+      "saved_notebook_and_html_review": "PASS"
+    }
   },
   "status": "PASS"
 }

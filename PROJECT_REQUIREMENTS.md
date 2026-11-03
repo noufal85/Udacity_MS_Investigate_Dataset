@@ -141,3 +141,24 @@ blockers. The canonical analysis code is unchanged from `3b564a4`; the rebuilt
 notebook executed all 10 code cells with no errors and six embedded figures.
 All eight tests passed. HTML content was checked locally; a browser layout
 inspection was unavailable because the browser rejected the local file URL.
+
+## Focused wording follow-up
+
+The no-ai-slop review inspected revision `cd1f38b` on `main`. The owner
+authorized the three suggested trims and publication. This is a writing-only
+change; required sections, numbers, methods and limitations must stay intact.
+
+| Finding | Planned change | Verification | Status |
+|---|---|---|---|
+| Generic conclusion opening | Began with the appointment totals | Rebuilt notebook and HTML contain the direct opening | Verified |
+| Repeated age-and-delay commentary | Kept the numerical example and explanation of group sizes | Only Markdown cells 24 and 25 changed; code sources and chart images are identical | Verified |
+| Repeated conclusion recap | Kept the caution about causation without another summary | Saved exports reviewed against the writing skill's evaluation guide | Verified |
+
+The no-ai-slop evaluation checks passed for this focused edit. Required
+headings, useful section introductions, specific numerical findings and
+methodological cautions remain. No claims about authorship are made.
+The notebook executed all 10 code cells without errors and retained six
+charts; all eight tests passed. An independent reviewer approved the exact
+revised notebook and HTML and independently reran all eight tests.
+Validation file hashes are refreshed before publication; the final handoff
+reports the verified remote revision.

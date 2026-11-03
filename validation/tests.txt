@@ -8,7 +8,7 @@ test_plot_helper_returns_labeled_axes (test_analysis.SummaryTests.test_plot_help
 test_rate_table_keeps_denominators_and_observed_groups (test_analysis.SummaryTests.test_rate_table_keeps_denominators_and_observed_groups) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.179s
+Ran 8 tests in 0.132s
 
 OK
 Data source unavailable: HTTP Error 403: Forbidden

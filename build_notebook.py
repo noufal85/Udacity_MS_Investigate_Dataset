@@ -448,17 +448,14 @@ rate than appointments booked further ahead. For example, among people aged
 for same-day appointments and {age_and_delay.loc[('18-34','31-60 days'),'no_show_pct']:.1f}% for
 appointments booked 31–60 days ahead.
 
-Age and booking delay both matter to the description of these records.
-Looking at only one can hide important differences in the other. The counts
-also help show which percentages come from smaller groups.
+The counts show which percentages come from smaller groups.
 """)
 
 md(f"""
 <a id="conclusions"></a>
 ## Conclusions
 
-This section brings the answers to the four questions together. Of the
-{len(clean):,} appointments used in the analysis,
+Of the {len(clean):,} appointments used in the analysis,
 **{int(clean.no_show.sum()):,} were missed ({overall:.2f}%)**—about one in five.
 
 ### Age
@@ -481,9 +478,8 @@ Overall, the SMS-recorded group had a higher missed-appointment rate. But
 within every booking-delay range where both groups appeared, it had a lower
 rate. The overall numbers alone would therefore give an incomplete picture.
 
-Taken together, these findings show why age, booking delay and message records
-should be considered together when discussing missed appointments. They do
-not establish that age, a longer delay or a message caused a missed visit.
+These comparisons do not establish that age, a longer delay or a message
+caused a missed visit.
 """)
 
 md(f"""
