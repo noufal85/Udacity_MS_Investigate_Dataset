@@ -10,8 +10,8 @@
     "waiting_days",
     "sms_received"
   ],
-  "code_cells_executed": 8,
-  "nonempty_code_outputs": 8,
+  "code_cells_executed": 10,
+  "nonempty_code_outputs": 10,
   "embedded_html_figures": 6,
   "shared_sms_lead_time_bands": 5,
   "sms_direction_reversal_verified": true,
@@ -19,5 +19,14 @@
     "group_rates",
     "label_plot"
   ],
+  "writing_revision": {
+    "date": "2026-11-03",
+    "plain_language_review": "PASS",
+    "section_purposes_and_chart_explanations": "PASS",
+    "analysis_code_unchanged": true,
+    "independent_followup_reviews": 2,
+    "local_skill_validation": "PASS",
+    "browser_layout_review": "Unavailable: local file URL rejected"
+  },
   "status": "PASS"
 }

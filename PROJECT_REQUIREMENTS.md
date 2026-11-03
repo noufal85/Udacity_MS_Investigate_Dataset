@@ -40,7 +40,7 @@ model, hypothesis test, confidence interval, or causal conclusion is required.
 
 | ID | Requirement | Artifact and verification | Status |
 |---|---|---|---|
-| R1 | Functional reproducible code | Clean kernel executed all 8 code cells; no error outputs; 8 focused tests | Verified |
+| R1 | Functional reproducible code | Clean kernel executed all 10 code cells; no error outputs; 8 focused tests | Verified |
 | R2 | Appropriate NumPy/Pandas and vectorization | Pandas parsing, categorical bands, vectorized outcome/lead-time derivation, NumPy plot bins/index arrays | Verified |
 | R3 | At least one helper function used more than once | `group_rates` and `label_plot` reused across analyses; tested helpers embedded in notebook | Verified |
 | R4 | Clearly posed questions answered by the analysis | Four questions; each followed by computed tables, figures and findings | Verified |
@@ -50,7 +50,7 @@ model, hypothesis test, confidence interval, or causal conclusion is required.
 | R8 | Accurate tentative conclusions and limitations | Findings rechecked against actual rates; repeated patients, confounding, timing, scope and missing context discussed | Verified |
 | R9 | Logical notebook flow with Markdown explanations | All required sections; no remaining template tips/placeholders | Verified |
 | R10 | Appropriate plot types, labels, scales and legends | All figure PNGs inspected; HTML structure contains tables, headings and six embedded PNGs | Verified |
-| R11 | Executed notebook and shareable report | 21 cells, 8 executed code cells with nonempty outputs, 0 error outputs; HTML export verified | Verified |
+| R11 | Executed notebook and shareable report | 28 cells, 10 executed code cells with nonempty outputs, 0 error outputs; HTML export verified | Verified |
 | R12 | Submission hygiene | Explicit file list and ignore rules exclude raw CSV, archive, environment and caches; no identifiers shown in previews | Verified locally; publication authorized |
 
 ## Work sequence
@@ -116,3 +116,28 @@ course first, then the mirror pinned to commit
 `9a015604477dbaaadd4187b9b80522abdb722bb3`, and verifies the checksum before saving.
 This downloads source data only; it does not copy another student's analysis
 or publish raw data. A regression test covers the HTTP-403 fallback path.
+
+## Writing feedback received November 3, 2026
+
+The user supplied writing feedback and a screenshot of the published report.
+The local revision is `3b564a4`; no separate evaluator commit was provided.
+This revision addresses clarity and organization while preserving the source
+data, cleaning rules, calculations and conclusions. Comments about possible
+AI authorship are not treated as evidence of authorship or as a request to
+misrepresent how the work was produced.
+
+| Feedback | Change and verification | Status |
+|---|---|---|
+| Use easy-to-understand English | Rewrote explanations for a reader without a statistics background; two independent reviewers confirmed clarity and unchanged findings | Verified |
+| Break up dense report sections | Used shorter Markdown cells and focused subsections, especially findings and limitations | Verified |
+| Keep the template's clear sections | Retained introduction, questions, data wrangling, exploration, conclusions and limitations | Verified |
+| Explain each section's purpose | Started each main section and analysis question with a short introduction | Verified |
+| Explain the charts and findings | Described comparisons, results and limits; reviewed the saved notebook, HTML content and chart images | Verified |
+| Keep process notes out of the analysis | Kept setup, packaging and integrity details in README/code; removed tool and template-editing commentary from report prose | Verified |
+| Prevent recurrence in the project skill | Added a plain-language report check to the local udacity-project skill, retaining accuracy and required AI disclosures; skill validator passed | Verified |
+
+Both independent follow-up reviewers approved the writing revision without
+blockers. The canonical analysis code is unchanged from `3b564a4`; the rebuilt
+notebook executed all 10 code cells with no errors and six embedded figures.
+All eight tests passed. HTML content was checked locally; a browser layout
+inspection was unavailable because the browser rejected the local file URL.
