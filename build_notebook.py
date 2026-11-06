@@ -112,6 +112,7 @@ plt.rcParams.update({
 FIGURES = Path('figures')
 FIGURES.mkdir(exist_ok=True)
 DATA = Path('data/noshowappointments-kagglev2-may-2016.csv')
+# Stop if the input differs from the snapshot used for the report's findings.
 EXPECTED_SHA256 = '9132d3e7d0246617df9041d3764f20ad6f08e7b0d9f0997fa254fc5e52eda27d'
 assert hashlib.sha256(DATA.read_bytes()).hexdigest() == EXPECTED_SHA256
 print(f'Python {sys.version.split()[0]} | pandas {pd.__version__} | NumPy {np.__version__} | matplotlib {matplotlib.__version__}')
@@ -134,14 +135,17 @@ values are not needed to understand the comparisons.
 """)
 
 code("""
+# IDs are labels, not measurements; keep them as text to avoid numeric conversion.
 raw = pd.read_csv(DATA, dtype={'PatientId': 'string', 'AppointmentID': 'string'})
 print('Rows and columns:', raw.shape)
 display(raw.drop(columns=['PatientId', 'AppointmentID']).head())
 display(pd.DataFrame({'dtype': raw.dtypes.astype(str), 'missing': raw.isna().sum(),
                       'distinct': raw.nunique(dropna=False)}))
+# Check the original age range and spread before deciding which values are invalid.
 display(raw[['Age', 'SMS_received']].describe())
 print('Exact duplicate rows:', int(raw.duplicated().sum()))
 print('Duplicate appointment IDs:', int(raw['AppointmentID'].duplicated().sum()))
+# Repeated patients are expected and must not be removed as duplicate appointments.
 print('Unique patient identifiers:', raw['PatientId'].nunique())
 print("Additional rows after each patient's first appointment:", int(raw['PatientId'].duplicated().sum()))
 display(raw['No-show'].value_counts().rename('appointments').to_frame())
@@ -193,6 +197,7 @@ helper_source += "\nprint('Data checks and chart helpers are ready.')"
 code(helper_source)
 
 code("""
+# Reconcile exclusions with the input count before using the cleaned appointments.
 appointments, cleaning_audit = clean_appointments(raw)
 display(cleaning_audit)
 assert len(raw) - cleaning_audit['removed'].sum() == len(appointments)
@@ -202,8 +207,10 @@ assert not appointments[['age_band', 'waiting_band', 'sms_group']].isna().any().
 print('Appointments after cleaning:', len(appointments))
 print('Unique patients:', appointments['patient_id'].nunique())
 print('Appointment dates:', appointments['appointment_day'].min().date(), 'to', appointments['appointment_day'].max().date())
-display(appointments[['age', 'waiting_days']].agg(['min', 'median', 'mean', 'max']).rename(
-    index={'min': 'Smallest', 'median': 'Middle value', 'mean': 'Average', 'max': 'Largest'},
+# Mean and median describe the center; standard deviation describes the spread.
+display(appointments[['age', 'waiting_days']].agg(['min', 'median', 'mean', 'std', 'max']).rename(
+    index={'min': 'Smallest', 'median': 'Middle value', 'mean': 'Average',
+           'std': 'Standard deviation', 'max': 'Largest'},
     columns={'age': 'Age (years)', 'waiting_days': 'Booking delay (days)'}
 ).round(2))
 display(appointments[['gender', 'age', 'waiting_days', 'sms_group', 'no_show']].head())
@@ -218,6 +225,12 @@ The cleaning leaves **{len(clean):,} appointments for
 
 That is about one missed appointment in every five. This overall percentage
 is the starting point for the age, booking-delay and message comparisons below.
+
+The middle booking delay was {clean.waiting_days.median():.0f} days, while the
+average was {clean.waiting_days.mean():.1f} days. Some long delays pull the
+average above the middle value. The standard deviation was
+{clean.waiting_days.std():.1f} days; it measures how widely the delays varied
+around the average, not how accurately the average is known.
 """)
 
 md("""
@@ -236,6 +249,7 @@ could have many missed appointments without having a high percentage missed.
 """)
 
 code("""
+# Keep group sizes alongside rates so larger groups do not appear worse just by size.
 overall_pct = 100 * appointments['no_show'].mean()
 outcome_counts = appointments['no_show'].map({False: 'Attended', True: 'Missed'}).value_counts().reindex(['Attended', 'Missed'])
 display(outcome_counts.rename('appointments').to_frame())
@@ -244,6 +258,7 @@ show_rates(age_rates.rename_axis('Age group'))
 fig, axes = plt.subplots(1, 2, figsize=(12, 4), constrained_layout=True)
 outcome_counts.plot.bar(ax=axes[0], color=['#26736b', '#c2673d'], rot=0)
 label_plot(axes[0], 'Most appointments were attended', 'Recorded attendance', 'Appointments')
+# Five-year bins show the age distribution without a separate bar for every age.
 appointments['age'].plot.hist(ax=axes[1], bins=np.arange(0, 121, 5), color='#4b75a8', edgecolor='white')
 label_plot(axes[1], 'Appointment ages span infants through older adults', 'Age (years)', 'Appointments')
 fig.savefig(FIGURES / '01_outcome_and_age.png', bbox_inches='tight')
@@ -259,6 +274,7 @@ appointments was missed? The dashed line shows the overall rate for comparison.
 """)
 
 code("""
+# Compare percentages across age groups; the dashed line is the overall benchmark.
 fig, ax = plt.subplots(figsize=(8, 4), constrained_layout=True)
 age_rates['no_show_pct'].plot.bar(ax=ax, color='#4b75a8', rot=0, label='Age-group rate')
 ax.axhline(overall_pct, color='#a54e2a', linestyle='--', label=f'Overall {overall_pct:.2f}%')
@@ -293,9 +309,11 @@ group. Appointments booked for the same day are shown separately.
 """)
 
 code("""
+# Compare each booking-delay group's missed share, keeping same-day bookings separate.
 waiting_rates = group_rates(appointments, 'waiting_band')
 show_rates(waiting_rates.rename_axis('Days between booking and appointment'))
 fig, axes = plt.subplots(1, 2, figsize=(13, 4.5), constrained_layout=True)
+# The histogram shows the long tail of delays; rate bars answer the attendance question.
 appointments['waiting_days'].plot.hist(ax=axes[0], bins=np.arange(0, 186, 5), color='#26736b', edgecolor='white')
 label_plot(axes[0], 'Many appointments were booked close to their date', 'Days between booking and appointment', 'Appointments')
 waiting_rates['no_show_pct'].plot.bar(ax=axes[1], color='#26736b', rot=30, label='Booking-delay group')
@@ -335,8 +353,10 @@ test of reminders.
 """)
 
 code("""
+# Show both group size and missed percentage because the SMS groups are unequal.
 sms_rates = group_rates(appointments, 'sms_group')
 show_rates(sms_rates.rename_axis('Text-message record'))
+# Booking delays may differ between these groups, so this is not a test of reminders.
 display(appointments.groupby('sms_group', observed=True)['waiting_days'].agg(['median', 'mean']).rename(
     columns={'median': 'Middle booking delay (days)', 'mean': 'Average booking delay (days)'}
 ).round(2))
@@ -379,8 +399,10 @@ rate.
 """)
 
 code("""
+# Compare SMS groups within the same delay ranges rather than mixing all bookings.
 sms_by_wait = group_rates(appointments, ['waiting_band', 'sms_group'])
 show_rates(sms_by_wait.rename_axis(['Booking-delay group', 'Text-message record']))
+# No same-day SMS appointments were observed; leave that rate missing, not zero.
 rate_matrix = sms_by_wait['no_show_pct'].unstack('sms_group')
 count_matrix = sms_by_wait['appointments'].unstack('sms_group')
 display(count_matrix)
@@ -416,15 +438,18 @@ group. Darker cells mean a larger percentage of appointments were missed;
 """)
 
 code("""
+# A heatmap compares age and booking delay together without drawing many separate bars.
 joint = group_rates(appointments, ['age_band', 'waiting_band'])
 show_rates(joint.rename_axis(['Age group', 'Booking-delay group']))
 joint_rates = joint['no_show_pct'].unstack('waiting_band')
 joint_counts = joint['appointments'].unstack('waiting_band')
 fig, ax = plt.subplots(figsize=(11, 5), constrained_layout=True)
+# Hide rates from groups below 100 appointments; their small counts could mislead.
 shown = joint_rates.where(joint_counts >= 100)
 image = ax.imshow(shown.to_numpy(), cmap='YlGnBu', vmin=0, vmax=45, aspect='auto')
 ax.set_xticks(np.arange(len(shown.columns)), labels=shown.columns, rotation=25)
 ax.set_yticks(np.arange(len(shown.index)), labels=shown.index)
+# Include counts so the reader can see the number of appointments behind each rate.
 for row in range(len(shown.index)):
     for col in range(len(shown.columns)):
         value = shown.iloc[row, col]

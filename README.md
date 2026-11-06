@@ -1,20 +1,10 @@
 # Appointment no-show investigation
 
-Udacity's Investigate a Dataset project, using the supplied Brazilian appointment
-no-show snapshot. The analysis examines age, booking lead time and recorded SMS
-receipt. It describes associations and explicitly avoids causal claims.
-
-## Report wording update
-
-The report now uses shorter sections and plain-English explanations for readers
-who do not work with statistics. Each main section explains its purpose, and
-the chart discussions describe what was compared and what the results mean.
-The data, cleaning rules and numerical findings are unchanged.
-
-Setup commands, checksum verification and submission details stay in this
-README and the supporting scripts. The report itself focuses on the data and
-findings. The analysis used Pandas documentation for date conversion and grouped
-summaries; development-tool and template-editing notes are not data references.
+Udacity's Investigate a Dataset project, using Brazilian medical appointment
+records supplied with the course. The report compares missed appointments by
+age, days between booking and the appointment, and whether a text message was
+recorded. It describes patterns in the records, without showing what caused
+patients to miss appointments.
 
 ## Read the report
 

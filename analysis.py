@@ -43,9 +43,11 @@ def clean_appointments(raw):
         df = df.loc[~mask].copy()
         audit.append({"rule": reason, "removed": removed, "remaining": len(df)})
 
+    # Deduplicate appointments, not patients: one person can have several visits.
     exclude(df.duplicated(), "Exact duplicate rows")
     if df["appointment_id"].duplicated().any():
         raise ValueError("Conflicting duplicate appointment IDs require investigation")
+    # Unparseable values become missing so the audit records their removal.
     for column in ["scheduled_day", "appointment_day"]:
         df[column] = pd.to_datetime(df[column], utc=True, errors="coerce")
     df["age"] = pd.to_numeric(df["age"], errors="coerce")
@@ -55,6 +57,7 @@ def clean_appointments(raw):
     exclude(df[critical].isna().any(axis=1), "Missing or unparseable critical fields")
     if not df["sms_received"].isin([0, 1]).all():
         raise ValueError("Unexpected SMS_received values")
+    # Age zero includes infants; only negative ages are invalid here.
     exclude(df["age"] < 0, "Negative ages")
 
     # Appointment timestamps omit appointment time; compare encoded calendar dates.
@@ -62,11 +65,14 @@ def clean_appointments(raw):
         df["appointment_day"].dt.normalize() - df["scheduled_day"].dt.normalize()
     ).dt.days
     exclude(df["waiting_days"] < 0, "Appointment precedes scheduling date")
+    # The source label is easy to reverse: Yes means the appointment was missed.
     df["no_show"] = df["no_show_label"].eq("Yes")
+    # Left-closed bands put age 18 in 18-34, not in the under-18 group.
     df["age_band"] = pd.cut(
         df["age"], [0, 18, 35, 50, 65, np.inf], right=False,
         labels=["Under 18", "18-34", "35-49", "50-64", "65+"],
     )
+    # Keep same-day bookings separate from appointments booked further ahead.
     df["waiting_band"] = pd.cut(
         df["waiting_days"], [-1, 0, 7, 14, 30, 60, np.inf],
         labels=["Same day", "1-7 days", "8-14 days", "15-30 days", "31-60 days", "61+ days"],
@@ -80,6 +86,8 @@ def clean_appointments(raw):
 
 def group_rates(df, columns):
     """Keep denominators alongside observed group rates; empty groups stay absent."""
+    # A Boolean mean is the missed share; counts show how many visits it describes.
+    # observed=True avoids reporting a rate for a group with no appointments.
     result = df.groupby(columns, observed=True, dropna=False)["no_show"].agg(
         appointments="size", no_shows="sum", no_show_rate="mean",
     )

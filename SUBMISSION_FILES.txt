@@ -8,6 +8,7 @@ build_notebook.py
 execute_report.py
 prepare_data.py
 tests/test_analysis.py
+tests/test_notebook_comments.py
 .gitignore
 figures/01_outcome_and_age.png
 figures/02_age_rates.png

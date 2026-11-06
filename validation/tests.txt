@@ -6,9 +6,11 @@ test_download_uses_verified_mirror_when_course_url_is_forbidden (test_analysis.D
 test_every_valid_record_gets_an_age_and_waiting_band (test_analysis.SummaryTests.test_every_valid_record_gets_an_age_and_waiting_band) ... ok
 test_plot_helper_returns_labeled_axes (test_analysis.SummaryTests.test_plot_helper_returns_labeled_axes) ... ok
 test_rate_table_keeps_denominators_and_observed_groups (test_analysis.SummaryTests.test_rate_table_keeps_denominators_and_observed_groups) ... ok
+test_cleaned_summary_displays_standard_deviation (test_notebook_comments.NotebookDocumentationTests.test_cleaned_summary_displays_standard_deviation) ... ok
+test_each_code_cell_contains_an_explanatory_comment (test_notebook_comments.NotebookDocumentationTests.test_each_code_cell_contains_an_explanatory_comment) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.132s
+Ran 10 tests in 0.130s
 
 OK
 Data source unavailable: HTTP Error 403: Forbidden

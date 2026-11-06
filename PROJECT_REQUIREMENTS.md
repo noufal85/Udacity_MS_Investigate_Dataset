@@ -40,7 +40,7 @@ model, hypothesis test, confidence interval, or causal conclusion is required.
 
 | ID | Requirement | Artifact and verification | Status |
 |---|---|---|---|
-| R1 | Functional reproducible code | Clean kernel executed all 10 code cells; no error outputs; 8 focused tests | Verified |
+| R1 | Functional reproducible code | Clean kernel executed all 10 code cells; no error outputs; 10 focused tests | Verified |
 | R2 | Appropriate NumPy/Pandas and vectorization | Pandas parsing, categorical bands, vectorized outcome/lead-time derivation, NumPy plot bins/index arrays | Verified |
 | R3 | At least one helper function used more than once | `group_rates` and `label_plot` reused across analyses; tested helpers embedded in notebook | Verified |
 | R4 | Clearly posed questions answered by the analysis | Four questions; each followed by computed tables, figures and findings | Verified |
@@ -48,10 +48,10 @@ model, hypothesis test, confidence interval, or causal conclusion is required.
 | R6 | Three predictors; univariate and bivariate exploration | Age, lead time, SMS distributions and outcome comparisons; stratified synthesis | Verified |
 | R7 | At least two plot types and relevant statistics | Histograms, count/rate bars and heatmap; all 6 figures visually inspected | Verified |
 | R8 | Accurate tentative conclusions and limitations | Findings rechecked against actual rates; repeated patients, confounding, timing, scope and missing context discussed | Verified |
-| R9 | Logical notebook flow with Markdown explanations | All required sections; no remaining template tips/placeholders | Verified |
+| R9 | Logical notebook flow with Markdown explanations | All required sections, meaningful comments in all 10 code cells, no remaining template tips/placeholders | Verified |
 | R10 | Appropriate plot types, labels, scales and legends | All figure PNGs inspected; HTML structure contains tables, headings and six embedded PNGs | Verified |
 | R11 | Executed notebook and shareable report | 28 cells, 10 executed code cells with nonempty outputs, 0 error outputs; HTML export verified | Verified |
-| R12 | Submission hygiene | Explicit file list and ignore rules exclude raw CSV, archive, environment and caches; no identifiers shown in previews | Verified locally; publication authorized |
+| R12 | Submission hygiene | Explicit file list and ignore rules exclude raw CSV, archive, environment and caches; no identifiers shown in previews | Verified; publication authorized |
 
 ## Work sequence
 
@@ -162,3 +162,105 @@ charts; all eight tests passed. An independent reviewer approved the exact
 revised notebook and HTML and independently reran all eight tests.
 Validation file hashes are refreshed before publication; the final handoff
 reports the verified remote revision.
+
+## Code-comment feedback
+
+The user supplied feedback requiring comments within code cells and reasoning
+for cleaning, summaries and plots. The local baseline is `184a563` on `main`;
+the reviewer did not identify a separate evaluated commit. Existing template
+sections and Markdown explanations are retained. The supplied Simplilearn
+comments article could not be retrieved during intake; the complete pasted
+feedback is the requirement used here.
+
+| Feedback | Planned change | Verification | Status |
+|---|---|---|---|
+| Comments within code cells | Added concise reasons for the choices in each code cell, including embedded helpers | Saved-notebook comment regression test and two independent reviews | Verified |
+| Explain cleaning and analysis decisions | Commented on ID types, date handling, invalid values, group sizes, rates and empty groups | Analysis AST matches baseline; comments are visible in the HTML | Verified |
+| Explain descriptive summaries and spread | Retained describe(); added standard deviation to the cleaned age/delay summary and explained it | Saved-output regression test and independently recomputed statistics | Verified |
+| Explain plot choices and interpretations | Commented on histogram bins, rate comparisons, shared booking delays and heatmap counts | All six chart images match baseline exactly; Markdown interpretations retained | Verified |
+| Preserve notebook flow and limits | Kept all six requested sections and the descriptive, noncausal scope | Heading, numerical-result and no-ai-slop evaluation checks passed | Verified |
+
+Both new tests failed on the original saved notebook before editing and passed
+after regeneration. All 10 tests pass. The notebook executed all 10 code cells
+without errors and retained six figures. Both independent reviewers approved
+the saved notebook and HTML without blockers. The cleaned booking-delay median,
+mean and standard deviation are 4, 10.184345 and 15.255153 days, respectively.
+The report rounds them to 4, 10.2 and 15.3 days.
+
+Only the cleaned-data summary changes executable notebook behavior, by adding
+standard deviation. The analysis module's syntax tree is unchanged; the other
+nine code-cell outputs and all six chart images match `184a563` exactly.
+The no-ai-slop evaluation retains necessary comments, rubric headings, methods
+and limitations. Static HTML content was checked; no browser layout review is
+claimed. This update is prepared locally; no new commit, push or Udacity
+submission is assumed from the feedback alone.
+
+## Final writing review
+
+The user requested a further check against the earlier writing feedback.
+Scope: the current local notebook, saved HTML, README and code comments.
+The existing code-comment revision is preserved; this is not an AI-authorship
+test or an attempt to remove evidence of assistance. Technical provenance and
+review history remain in this document.
+
+| Check | Planned action | Verification | Status |
+|---|---|---|---|
+| Editorial commentary in the README | Removed the report-editing recap and introduced the analysis directly | Revised README passed no-ai-slop evaluation and independent review | Verified |
+| Earlier report problems | Checked tool citations as data sources, template-completion notes, jargon and generic recap prose | Read all notebook Markdown and comments; checked the saved HTML; independent reviewer found no meaningful issues | Verified |
+| Required explanations | Retained useful purpose statements, clear headings, decision comments and methodological cautions | Both independent reviewers approved; saved-notebook checks passed | Verified |
+| Technical and factual accuracy | Preserved the current notebook, outputs and chart files; reran tests | Notebook, report, analysis and figure hashes unchanged; all 10 tests passed again | Verified |
+
+No claim of AI-free or human-only authorship is made. No stylistic audit can
+guarantee grading acceptance or replace the owner's understanding of the work
+and compliance with the course's assistance/disclosure rules.
+
+Completed November 4, 2026. The no-ai-slop evaluation was applied to the
+reader-facing artifacts, not just to a word scan. Both independent reviewers
+found no remaining material writing issues. Required research questions,
+headings, useful purpose statements, factual contrasts and causal cautions are
+retained because they explain the analysis. Review history, tool provenance
+and reproducibility instructions are not erased or treated as evidence of
+human-only authorship.
+
+Only README prose changed in this final pass. The previously executed notebook
+and HTML were verified unchanged, so no new kernel execution was needed.
+The fresh test run passed all 10 tests. The complete local code-comment and
+writing revision still awaits a deliberate commit and push.
+
+## Publication authorization
+
+On November 5, 2026, the owner authorized committing and pushing the reviewed
+code-comment and writing revision to `main` in the existing public repository.
+The report and source files remain identical to the independently reviewed
+local artifacts. All 10 tests and the saved-notebook and file-hash checks were
+rerun before publication. No further writing changes were requested or made.
+The final handoff identifies the remote revision after verification; GitHub
+publication does not perform the separate Udacity resubmission.
+
+## Submission checklist review
+
+On November 5, 2026, the owner supplied the project evaluation and submission
+checklist and requested another analysis before publication. The checklist
+is read alongside the detailed rubric in `../Course Overview.docx`, including
+its code, exploration, conclusions and communication criteria. The supplied
+checklist's `.ipnyb` is interpreted as the standard `.ipynb` notebook format.
+
+| Requirement | Verification planned | Status |
+|---|---|---|
+| Choose a curated dataset and identify it | Course no-show dataset identified; local CSV hash matches the exact supplied archive member; report names the source | Meets specifications |
+| Pose questions and describe the investigation | Four questions have matching age, delay, SMS and combined analysis sections | Meets specifications |
+| Document data wrangling | Missingness/duplicates checked; one negative age and five negative delays excluded; date handling, repeat patients and count audit explained | Meets specifications |
+| Provide relevant statistics and plots | Descriptive tables, counts and rates accompany six charts; histograms, bars and a heatmap cover three predictors | Meets specifications |
+| Supply HTML/PDF and analysis code | HTML, Investigate_a_Dataset.ipynb and supporting Python files included in SUBMISSION_FILES.txt | Meets specifications |
+| Run from start to finish without errors | Rebuilt notebook verified to have no saved outputs, then ran code cells 1-10 in a clean kernel; zero errors, six saved figures, all 10 tests pass | Meets specifications |
+| Meet detailed rubric specifications | Both independent reviews approved NumPy/Pandas use, reusable helpers, comments, questions, cleaning, exploration, conclusions, limitations and chart choices | Meets specifications |
+
+Reviewer acceptance cannot be certified in advance. The review records what
+the files and execution demonstrate; a final grading decision remains with
+Udacity. Both independent reviewers found no blocking gap, completing the
+gate for the earlier commit-and-push request. The two reused helpers are called
+five times (`group_rates`) and nine times (`label_plot`), and all 10 code cells
+contain explanatory comments. Inferential tests and machine learning are
+optional in the original assignment and were not added as artificial pass
+requirements. Numerical conclusions were independently recomputed, including
+the SMS direction reversal in all five shared delay bands.
